@@ -3,7 +3,7 @@
     <!-- Form to add new comment -->
     <div class="grid">
       <div id="section-form">
-        <h1 id="title">Guestbool</h1>
+        <h1 id="title">Guestbook</h1>
         <button @click="downloadFile">Download Guide</button>
         <section>
           <h2>Add a Comment</h2>

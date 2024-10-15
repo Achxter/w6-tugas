@@ -1,5 +1,6 @@
 import { PrismaClient } from '@prisma/client';
 import { defineEventHandler, readBody } from 'h3';
+import validator from 'validator';
 
 const prisma = new PrismaClient();
 
@@ -11,11 +12,16 @@ export default defineEventHandler(async (event) => {
     return { error: 'All fields are required.' };
   }
 
+  // Sanitize input
+  const sanitizedName = validator.escape(name);
+  const sanitizedEmail = validator.normalizeEmail(email);
+  const sanitizedComment = validator.escape(comment);
+
   const newEntry = await prisma.guestbookEntry.create({
     data: {
-      name,
-      email,
-      comment,
+      name: sanitizedName,
+      email: sanitizedEmail,
+      comment: sanitizedComment,
     },
   });
 
