@@ -12,9 +12,10 @@ export default defineEventHandler(async (event) => {
   }
 
   try {
-    const result = await prisma.$queryRawUnsafe(
-      `SELECT * FROM GuestbookEntry WHERE comment LIKE '%${search}%'`
-    );
+    // Use $queryRaw with parameterized query to prevent SQL injection
+    const result = await prisma.$queryRaw`
+      SELECT * FROM GuestbookEntry WHERE comment LIKE ${`%${search}%`}
+    `;
 
     return result;
   } catch (e) {
@@ -22,4 +23,3 @@ export default defineEventHandler(async (event) => {
     return { error: 'Error executing SQL query' };
   }
 });
-

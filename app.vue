@@ -1,10 +1,9 @@
 <template>
   <main class="container-fluid">
-
     <!-- Form to add new comment -->
     <div class="grid">
       <div id="section-form">
-        <h1 id="title">Guestbook</h1>
+        <h1 id="title">Guestboo</h1>
         <button @click="downloadFile">Download Guide</button>
         <section>
           <h2>Add a Comment</h2>
@@ -91,19 +90,19 @@ const addComment = async () => {
 const searchComments = async () => {
   try {
     if (!searchQuery.value) {
-      return fetchComments()
+      return fetchComments();
     }
 
     const response = await $fetch('/api/search-comment', {
       method: 'GET',
       query: { search: searchQuery.value }
-    })
+    });
 
-    comments.value = response
+    comments.value = response;
   } catch (error) {
-    console.error('Failed to search comments:', error)
+    console.error('Failed to search comments:', error);
   }
-}
+};
 
 const downloadFile = async () => {
   try {
